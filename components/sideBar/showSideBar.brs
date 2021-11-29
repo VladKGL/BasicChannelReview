@@ -36,20 +36,9 @@ sub OnButtonBarItemSelected(id as integer)
     ]
     mode = buttonAA[itemSelected]
     ' Creation new custom view
-    customView = CreateObject("roSGNode", "ContentRowGrid")
-
-    content = CreateObject("roSGNode", "ContentNode")
-    content.AddFields({
-        HandlerConfigGrid: {
-            name: "APIContentHandler",
-            query: mode
-        }
-    })
-
-    customView.content = content
-    m.top.GetScene().grid = customView
-    
-    m.top.GetScene().ComponentController.CallFunc("show", {
-        view: customView
-    })
+    m.top.GetScene().grid.content = m.top.GetScene()[mode]
+    m.top.GetScene().findNode("idCustomView").setFocus(true)
+    ' m.top.GetScene().ComponentController.CallFunc("show", {
+    '     view: customView
+    ' })
 end sub

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component name="ContentRowGridItem" extends="Group">
+    <interface>
+        <field id="itemContent" type="node" onChange="itemContentChanged" />
+    </interface>
+
+    <script type="text/brightscript" uri="ContentRowGridItem.brs" />
+    <children>
+        <Poster id="itemPoster" loadDisplayMode="scaleToFit" height="150" width="150" loadWidth="242" loadHeight="136" />
+        <Label id="itemTitleLabel" wrap="true" height="200" width="250" font="font:MediumBoldSystemFont" horizAlign="left" vertAlign="bottom" />
+        <ScrollingLabel id="itemDescriptionLabel" repeatCount="-1" height="230" maxWidth="250" text="Example" font="font:MediumBoldSystemFont" horizAlign="left" vertAlign="bottom" />
+    </children>
+</component>

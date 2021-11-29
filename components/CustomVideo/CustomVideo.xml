@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component name="CustomVideo" extends="Group">
+    <interface>
+        <field id="content" type="node" alias="exampleVideo.content" />
+        <field id="control" type="string" alias="exampleVideo.control" />
+    </interface>
+    <script type="text/brightscript" uri="CustomVideo.brs" />
+    <children>
+        <Video id="exampleVideo" />
+    </children>
+</component>

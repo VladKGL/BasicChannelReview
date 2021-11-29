@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <component name="APIContentHandler" extends="ContentHandler">
+    <script type="text/brightscript" uri="APIContentHandler.brs" />
+    <script type="text/brightscript" uri="Live.brs" />
+    <script type="text/brightscript" uri="Artists.brs" />
+    <script type="text/brightscript" uri="Podcasts.brs" />
+    <script type="text/brightscript" uri="../../source/rsg_utils.brs" />
+</component>

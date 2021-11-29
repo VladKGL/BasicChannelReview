@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="SideBar" extends="ButtonGroup" initialFocus="leftSideBarButtonGroup">
+<script type="text/brightscript" uri="showSideBar.brs"/>
+</component>

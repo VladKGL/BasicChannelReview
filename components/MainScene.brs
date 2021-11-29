@@ -7,7 +7,7 @@ sub Show(args as object)
     m.top.backgroundColor = "#000000"
 
     setUpCustomView()
-
+    
     m.top.ComponentController.CallFunc("show", {
         view: m.top.grid
     })

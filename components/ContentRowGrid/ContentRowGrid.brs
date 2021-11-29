@@ -8,6 +8,7 @@ sub init()
     contentGrid.observeField("itemSelected", "SelectedHandler")
 end sub
 
+
 function SelectedHandler(event as object)
     ' METHOD FOR HANDLING SELECTED NODE
     contentGrid = m.top.FindNode("contentGrid")
@@ -18,10 +19,11 @@ function SelectedHandler(event as object)
         videoContent.url = item.streamUrl
         videoContent.title = item.TITLE
         videoContent.streamformat = "hls"
-
+        
         video = createObject("RoSGNode", "CustomVideo")
         video.content = videoContent
         video.control = "play"
+        video.pourl = item.HDPOSTERURL
 
         m.top.GetScene().FindNode("leftSideBar").visible = false
         m.top.GetScene().FindNode("channelName").visible = false

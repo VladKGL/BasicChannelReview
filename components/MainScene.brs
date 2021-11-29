@@ -6,33 +6,51 @@ sub Show(args as object)
 
     m.top.backgroundColor = "#000000"
 
-    setUpCustomView()
-    
+    setUpAllViews()
+
     m.top.ComponentController.CallFunc("show", {
         view: m.top.grid
     })
 end sub
 
-function setUpCustomView()
-    ' Creation of custom view where all main content will be placed
+function setUpAllViews()
     customView = CreateObject("roSGNode", "ContentRowGrid")
     customView.id = "idCustomView"
 
-    content = CreateObject("roSGNode", "ContentNode")
-    content.AddFields({
+    contentLive = CreateObject("roSGNode", "ContentNode")
+    contentLive.AddFields({
         HandlerConfigGrid: {
             name: "APIContentHandler",
             query: "Live"
         }
     })
 
-    customView.content = content
+    customView.content = contentLive
     ' add custom view to main scene fields
     m.top.AddFields({
-        grid: customView
+        grid: customView,
+        Live: contentLive,
+    })
+
+    contentArtists = CreateObject("roSGNode", "ContentNode")
+    contentArtists.AddFields({
+        HandlerConfigGrid: {
+            name: "APIContentHandler",
+            query: "Artists"
+        }
+    })
+    contentPodcasts = CreateObject("roSGNode", "ContentNode")
+    contentPodcasts.AddFields({
+        HandlerConfigGrid: {
+            name: "APIContentHandler",
+            query: "Podcasts"
+        }
+    })
+    m.top.AddFields({
+        Podcasts: contentPodcasts,
+        Artists: contentArtists
     })
 end function
-
 
 
 function SetUpButtonBar()

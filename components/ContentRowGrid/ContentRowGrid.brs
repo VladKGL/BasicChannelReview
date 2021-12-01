@@ -2,7 +2,7 @@ sub init()
     m.top.translation = [0, 0]
     contentGrid = m.top.FindNode("contentGrid")
     contentGrid.Update({
-        translation: [280, 100]
+        translation: [310, 50]
         itemComponentName: "ContentRowGridItem"
     })
     contentGrid.observeField("itemSelected", "SelectedHandler")

@@ -7,11 +7,29 @@ sub Show(args as object)
     m.top.backgroundColor = "#000000"
 
     setUpAllViews()
-
+    setUpSideBar()
     m.top.ComponentController.CallFunc("show", {
         view: m.top.grid
     })
 end sub
+
+function onKeyEvent(key as string, press as boolean) as boolean
+    ' handling back button so we set focus on side bar
+    if press and key="left" and m.top.FindNode("idCustomView").isInFocusChain()
+            m.top.FindNode("leftSideBar").setFocus(true)
+        return true
+    end if
+
+    return false
+end function
+
+function setUpSideBar()
+    sideBar = createObject("roSGNode", "sideBar")
+    sideBar.id = "leftSideBar"
+    sideBar.translation=[0, 150]
+    sideBar.itemSpacings = [0, 0, 300]
+    m.top.appendChild(sideBar)
+end function
 
 function setUpAllViews()
     customView = CreateObject("roSGNode", "ContentRowGrid")

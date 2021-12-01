@@ -6,8 +6,8 @@
 
     <script type="text/brightscript" uri="ContentRowGridItem.brs" />
     <children>
-        <Poster id="itemPoster" loadDisplayMode="scaleToFit" height="150" width="150" loadWidth="242" loadHeight="136" />
-        <Label id="itemTitleLabel" wrap="true" height="200" width="250" font="font:MediumBoldSystemFont" horizAlign="left" vertAlign="bottom" />
-        <ScrollingLabel id="itemDescriptionLabel" repeatCount="-1" height="230" maxWidth="250" text="Example" font="font:MediumBoldSystemFont" horizAlign="left" vertAlign="bottom" />
+        <Poster id="itemPoster" loadDisplayMode="scaleToFit" height="200" width="200" loadWidth="250" loadHeight="250" />
+        <Label id="itemTitleLabel" maxLines="2" wrap="true" width="310" font="font:LargeBoldSystemFont" horizAlign="left" vertAlign="bottom" translation="[0, 200]"/>
+        <ScrollingLabel id="itemDescriptionLabel" repeatCount="-1" maxWidth="310" text="Example" font="font:LargeBoldSystemFont" horizAlign="left" vertAlign="bottom" translation="[0, 270]"/>
     </children>
 </component>

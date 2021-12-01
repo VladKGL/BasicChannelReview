@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="MainScene" extends="BaseScene">
     <children>
-        <Label id="channelName" height="150" width="150" font="font:MediumBoldSystemFont" text="Channel Name" wrap="true" horizAlign="left" vertAlign="top" translation="[50, 50]" color="#FFFFFF" />
-        <SideBar id="leftSideBar" translation="[0, 150]" itemSpacings="[0, 0, 300]" />
+        <Label id="channelName" height="150" width="150" font="font:LargeBoldSystemFont" text="Channel Name" wrap="true" horizAlign="left" vertAlign="top" translation="[50, 50]" color="#FFFFFF" />
+        <!-- <SideBar id="leftSideBar" translation="[0, 150]" itemSpacings="[0, 0, 300]" iconUri=""/> -->
     </children>
     <!-- importing main handler -->
     <script type="text/brightscript" uri="MainScene.brs" />

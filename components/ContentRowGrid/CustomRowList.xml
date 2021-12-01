@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component name="ContentRowGrid" extends="Group">
-    <script type="text/brightscript" uri="ContentRowGrid.brs" />
+<component name="CustomRowList" extends="Group">
+    <script type="text/brightscript" uri="CustomRowList.brs" />
     <interface>
         <field id="rowItemFocused" type="vector2d" alwaysNotify="true" alias="contentGrid.rowItemFocused" />
-        <field id="content" type="node"/>
+        <field id="content" type="node" />
         <field id="contentManagerType" type="string" value="grid" />
         <field id="saveState" type="boolean" alwaysNotify="true" value="false" />
         <field id="wasShown" type="boolean" alwaysNotify="true" value="false" />

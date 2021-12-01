@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component name="CustomVideo" extends="Group">
     <interface>
-        <field id="content" type="node" alias="exampleVideo.content" />
-        <field id="control" type="string" alias="exampleVideo.control" />
-        <field id="pourl" type="string" alias="videoPoster.uri"/>
+        <field id="content" type="node" alias="videoNode.content" />
+        <field id="control" type="string" alias="videoNode.control" />
+        <field id="pourl" type="string" alias="videoPoster.uri" />
     </interface>
     <script type="text/brightscript" uri="CustomVideo.brs" />
     <children>
-        <Video id="exampleVideo">
-            <Poster id="videoPoster" loadDisplayMode="scaleToFit" height="250" width="250" loadWidth="242" loadHeight="136" translation="[500, 250]"/>
+        <Video id="videoNode">
+            <Poster id="videoPoster" loadDisplayMode="scaleToFit" height="250" width="250" loadWidth="242" loadHeight="136" translation="[500, 250]" />
         </Video>
     </children>
 </component>

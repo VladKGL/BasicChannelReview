@@ -1,20 +1,42 @@
 sub Show(args as object)
     ' Add global field for side bar
     m.top.Addfields({
-        buttondid: 0,
+        choosedButtonId: 0,
     })
 
-    m.top.backgroundColor = "#000000"
+    ' m.top.backgroundColor = "#000000"
 
-    setUpAllViews()
+    setUpCustomViewContent()
+    setUpSideBar()
 
     m.top.ComponentController.CallFunc("show", {
-        view: m.top.grid
+        view: m.top.mainCustomRowList
     })
 end sub
 
-function setUpAllViews()
-    customView = CreateObject("roSGNode", "ContentRowGrid")
+function onKeyEvent(key as string, press as boolean) as boolean
+    ' handling left button so we set focus on row list
+    if press and key = "left" and m.top.FindNode("idCustomView").isInFocusChain()
+        m.top.FindNode("leftSideBar").setFocus(true)
+        return true
+    end if
+    if (key = "right") then
+        m.top.findNode("contentGrid").setFocus(true)
+        return true
+    end if
+    return false
+end function
+
+function setUpSideBar()
+    sideBar = createObject("roSGNode", "sideBar")
+    sideBar.id = "leftSideBar"
+    sideBar.translation = [0, 150]
+    sideBar.itemSpacings = [0, 0, 300]
+    m.top.appendChild(sideBar)
+end function
+
+function setUpCustomViewContent()
+    customView = CreateObject("roSGNode", "CustomRowList")
     customView.id = "idCustomView"
 
     contentLive = CreateObject("roSGNode", "ContentNode")
@@ -28,7 +50,7 @@ function setUpAllViews()
     customView.content = contentLive
     ' add custom view to main scene fields
     m.top.AddFields({
-        grid: customView,
+        mainCustomRowList: customView,
         Live: contentLive,
     })
 
@@ -106,7 +128,7 @@ sub OnButtonBarItemSelected(event as object)
         "Podcasts"
     ]
     mode = buttonAA[itemSelected]
-    customView = CreateObject("roSGNode", "ContentRowGrid")
+    customView = CreateObject("roSGNode", "CustomRowList")
     content = CreateObject("roSGNode", "ContentNode")
     content.AddFields({
         HandlerConfigGrid: {

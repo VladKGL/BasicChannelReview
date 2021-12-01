@@ -1,25 +1,25 @@
 sub init()
     m.top.translation = [0, 0]
-    contentGrid = m.top.FindNode("contentGrid")
-    contentGrid.Update({
-        translation: [280, 100]
-        itemComponentName: "ContentRowGridItem"
+    customRowListElement = m.top.FindNode("contentGrid")
+    customRowListElement.Update({
+        translation: [310, 50]
+        itemComponentName: "CustomRowListItem"
     })
-    contentGrid.observeField("itemSelected", "SelectedHandler")
+    customRowListElement.observeField("itemSelected", "SelectedHandler")
 end sub
 
 
 function SelectedHandler(event as object)
     ' METHOD FOR HANDLING SELECTED NODE
-    contentGrid = m.top.FindNode("contentGrid")
-    item = m.top.GetScene().grid.content.GetChild(contentGrid.rowItemSelected[0]).GetChild(contentGrid.rowItemSelected[1])
+    customRowListElement = m.top.FindNode("contentGrid")
+    item = m.top.GetScene().mainCustomRowList.content.GetChild(customRowListElement.rowItemSelected[0]).GetChild(customRowListElement.rowItemSelected[1])
 
     if item.streamUrl <> invalid
         videoContent = createObject("RoSGNode", "ContentNode")
         videoContent.url = item.streamUrl
         videoContent.title = item.TITLE
         videoContent.streamformat = "hls"
-        
+
         video = createObject("RoSGNode", "CustomVideo")
         video.content = videoContent
         video.control = "play"
@@ -41,7 +41,6 @@ function SelectedHandler(event as object)
 end function
 
 function onKeyEvent(key as string, press as boolean) as boolean
-    ' handling back button so we set focus on side bar
     if press and key = "back"
         if m.top.GetScene().ComponentController.allowCloseChannelOnLastView
             m.top.GetScene().exitChannel = false

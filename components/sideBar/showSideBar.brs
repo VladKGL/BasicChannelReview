@@ -59,8 +59,10 @@ sub OnButtonBarItemSelected(id as integer)
     ]
     mode = buttonAA[itemSelected]
     ' Creation new custom view
-    m.top.GetScene().mainCustomRowList.content = m.top.GetScene()[mode]
-    m.top.GetScene().findNode("idCustomView").setFocus(true)
+    customRowList = m.top.GetScene().mainCustomRowList
+    customRowList.content = m.top.GetScene()[mode]
+    customRowList.findNode("contentGrid").jumpToRowItem = [0, 0]
+    customRowList.setFocus(true)
     ' m.top.GetScene().ComponentController.CallFunc("show", {
     '     view: customView
     ' })

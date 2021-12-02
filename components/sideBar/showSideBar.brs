@@ -14,6 +14,10 @@ sub Init()
             icon: "https://cdn1.iconfinder.com/data/icons/celebrity-superstars/48/celebrity_-_singer-100.png"
         },
         {
+            name: "Favourites",
+            icon: "https://cdn0.iconfinder.com/data/icons/music-instrument-7/48/music_-_vinyl_record0A-100.png"
+        },
+        {
             name: "Settings",
             icon: "https://cdn1.iconfinder.com/data/icons/media-player-button/48/media_player_-_equalizer-100.png"
     }]
@@ -43,11 +47,25 @@ end function
 function buttonObserver()
     ' observer for OK button
     category_id = m.sideBarBttns.buttonSelected
-    if category_id <> 3
+    if category_id = 3
+        FavoritesSelected()
+    else if category_id <> 4
         OnButtonBarItemSelected(category_id)
     end if
 end function
 
+sub FavoritesSelected()
+    contentFav = CreateObject("roSGNode", "ContentNode")
+    contentFav.AddFields({
+        HandlerConfigGrid: {
+            name: "FavContentHandler"
+        }
+    })
+    customRowList = m.top.GetScene().mainCustomRowList
+    customRowList.content = contentFav
+    customRowList.findNode("contentGrid").jumpToRowItem = [0, 0]
+    customRowList.setFocus(true)
+end sub
 
 sub OnButtonBarItemSelected(id as integer)
     ' This is where you can handle a selection event

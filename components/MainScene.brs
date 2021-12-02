@@ -1,14 +1,16 @@
 sub Show(args as object)
     ' Add global field for side bar
+    registry = CreateObject("roRegistry")
     m.top.Addfields({
         choosedButtonId: 0,
     })
-
     ' m.top.backgroundColor = "#000000"
-
+    ' sec = CreateObject("roRegistrySection", "Ura")
+    ' sec.Write("RT", "5")
+    ' sec.Flush()
     setUpCustomViewContent()
     setUpSideBar()
-
+    sec = CreateObject("roRegistrySection", "Favorites")
     m.top.ComponentController.CallFunc("show", {
         view: m.top.mainCustomRowList
     })
@@ -31,7 +33,7 @@ function setUpSideBar()
     sideBar = createObject("roSGNode", "sideBar")
     sideBar.id = "leftSideBar"
     sideBar.translation = [0, 150]
-    sideBar.itemSpacings = [0, 0, 300]
+    sideBar.itemSpacings = [0, 0, 0, 235]
     m.top.appendChild(sideBar)
 end function
 

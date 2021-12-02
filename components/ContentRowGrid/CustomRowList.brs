@@ -12,7 +12,7 @@ end sub
 function SelectedHandler(event as object)
     ' METHOD FOR HANDLING SELECTED NODE
     customRowListElement = m.top.FindNode("contentGrid")
-    item = m.top.GetScene().mainCustomRowList.content.GetChild(customRowListElement.rowItemSelected[0]).GetChild(customRowListElement.rowItemSelected[1])
+    item = customRowListElement.content.GetChild(customRowListElement.rowItemSelected[0]).GetChild(customRowListElement.rowItemSelected[1])
 
     if item.streamUrl <> invalid
         videoContent = createObject("RoSGNode", "ContentNode")
@@ -41,6 +41,19 @@ function SelectedHandler(event as object)
 end function
 
 function onKeyEvent(key as string, press as boolean) as boolean
+    if press and key = "options"
+        customRowListElement = m.top.FindNode("contentGrid")
+        ' ADD SOME IF HERE
+        item = customRowListElement.content.GetChild(customRowListElement.rowItemFocused[0]).GetChild(customRowListElement.rowItemFocused[1])
+
+        info = {TITLE: item.TITLE, HDPOSTERURL: item.HDPOSTERURL, streamUrl: item.streamUrl, DESCRIPTION: item.DESCRIPTION}
+
+        sec = CreateObject("roRegistrySection", "Favorites")
+        sec.Write(item.id, FormatJson(info))
+        sec.Flush()
+        return true
+    end if
+
     if press and key = "back"
         if m.top.GetScene().ComponentController.allowCloseChannelOnLastView
             m.top.GetScene().exitChannel = false

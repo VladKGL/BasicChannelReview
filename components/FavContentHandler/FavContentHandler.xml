@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <component name="FavContentHandler" extends="ContentHandler">
+    <script type="text/brightscript" uri="FavContentHandler.brs" />
+    <script type="text/brightscript" uri="../../source/rsg_utils.brs" />
+</component>

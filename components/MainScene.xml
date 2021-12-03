@@ -2,15 +2,17 @@
 <component name="MainScene" extends="BaseScene">
     <children>
         <Label id="channelName" height="150" width="150" font="font:LargeBoldSystemFont" text="Channel Name" wrap="true" horizAlign="left" vertAlign="top" translation="[50, 50]" color="#FFFFFF" />
-        <SideBar 
-        id="leftSideBar"
+        
+        <SideBar id="leftSideBar"
         itemComponentName="sideBarItem"
         itemSize="[250, 70]"
         vertFocusAnimationStyle="floatingFocus"
         rowSpacings="[0, 0, 280]"
         translation="[0, 150]"/>
+        
+        <CustomRowList id="idCustomView"
+        />
     </children>
-    <!-- importing main handler -->
     <script type="text/brightscript" uri="MainScene.brs" />
     <script type="text/brightscript" uri="../../source/rsg_utils.brs" />
 </component>

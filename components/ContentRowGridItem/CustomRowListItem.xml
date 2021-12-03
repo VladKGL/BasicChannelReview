@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component name="CustomRowListItem" extends="Group">
+    <interface>
+        <field id="itemContent" type="node" onChange="itemContentChanged" />
+    </interface>
+
+    <script type="text/brightscript" uri="CustomRowListItem.brs" />
+    <children>
+        <Poster id="itemPoster" loadDisplayMode="scaleToFit" height="200" width="200" loadWidth="250" loadHeight="250" />
+        <LayoutGroup translation="[0, 200]" itemSpacings="[10]">
+            <Label id="itemTitleLabel" maxLines="2" wrap="true" width="310" font="font:LargeBoldSystemFont" horizAlign="left" vertAlign="bottom" />
+            <ScrollingLabel id="itemDescriptionLabel" repeatCount="-1" maxWidth="310" text="Example" font="font:LargeBoldSystemFont" horizAlign="left" vertAlign="bottom" />
+        </LayoutGroup>
+    </children>
+</component>

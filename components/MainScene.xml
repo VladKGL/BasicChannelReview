@@ -6,5 +6,6 @@
     </children>
     <!-- importing main handler -->
     <script type="text/brightscript" uri="MainScene.brs" />
+    <script type="text/brightscript" uri="sideBarLogic.brs" />
     <script type="text/brightscript" uri="../../source/rsg_utils.brs" />
 </component>

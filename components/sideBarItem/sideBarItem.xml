@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component name="sideBarItem" extends="Button" initialFocus="leftSideBarButtonGroup">
+    <interface> 
+        <field id = "itemContent" type = "node" onChange = "showcontent" />
+        <field id = "focusPercent" type = "float"/>
+      </interface>
+
+      <script type = "text/brightscript" uri="sideBarItem.brs" />
+</component>

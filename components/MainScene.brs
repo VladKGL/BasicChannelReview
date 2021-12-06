@@ -97,22 +97,18 @@ function SetUpSideBarContent() as object
     buttoninfos = [
         {
             name: "Live",
-            focus: true,
             icon: "https://cdn1.iconfinder.com/data/icons/media-player-button/48/media_player_-_fast_forward-100.png"
         },
         {
             name: "Artists",
-            focus: false,
             icon: "https://cdn0.iconfinder.com/data/icons/party2-3/64/Concert-music-rock-singer-100.png"
         },
         {
             name: "Podcasts",
-            focus: false,
             icon: "https://cdn1.iconfinder.com/data/icons/celebrity-superstars/48/celebrity_-_singer-100.png"
         },
         {
             name: "Settings",
-            focus: false,
             icon: "https://cdn1.iconfinder.com/data/icons/media-player-button/48/media_player_-_equalizer-100.png"
     }]
     sideBarContent = CreateObject("roSGNode", "ContentNode")

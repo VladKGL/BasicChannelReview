@@ -90,7 +90,7 @@ end function
 function setUpSideBar()
     sideBar = m.top.findNode("leftSideBar")
     sideBar.content = SetUpSideBarContent()
-    sideBar.observeField("itemSelected", "SideBarItemObserver")
+    sideBar.observeField("itemSelected", "SideBarItemSelectedObserver")
 end function
 
 function SetUpSideBarContent() as object
@@ -121,7 +121,7 @@ function SetUpSideBarContent() as object
     return sideBarContent
 end function
 
-function SideBarItemObserver(event as object)
+function SideBarItemSelectedObserver(event as object)
     itemSelectedID = event.getData()
     if itemSelectedID <> 3
         buttonAA = [

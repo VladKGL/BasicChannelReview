@@ -1,16 +1,10 @@
 sub Show(args as object)
-    ' Add global field for side bar
-    m.top.Addfields({
-        choosedButtonId: 0,
-    })
-
-    ' m.top.backgroundColor = "#000000"
 
     setUpCustomViewContent()
     setUpSideBar()
 
     m.top.ComponentController.CallFunc("show", {
-        view: m.top.mainCustomRowList
+        view: m.top.findNode("idCustomView")
     })
 end sub
 
@@ -27,17 +21,9 @@ function onKeyEvent(key as string, press as boolean) as boolean
     return false
 end function
 
-function setUpSideBar()
-    sideBar = createObject("roSGNode", "sideBar")
-    sideBar.id = "leftSideBar"
-    sideBar.translation = [0, 150]
-    sideBar.itemSpacings = [0, 0, 300]
-    m.top.appendChild(sideBar)
-end function
-
 function setUpCustomViewContent()
-    customView = CreateObject("roSGNode", "CustomRowList")
-    customView.id = "idCustomView"
+    customView = m.top.findNode("idCustomView")
+    customView.findNode("contentGrid").observeField("itemSelected", "SelectedHandler")
 
     contentLive = CreateObject("roSGNode", "ContentNode")
     contentLive.AddFields({
@@ -46,14 +32,6 @@ function setUpCustomViewContent()
             query: "Live"
         }
     })
-
-    customView.content = contentLive
-    ' add custom view to main scene fields
-    m.top.AddFields({
-        mainCustomRowList: customView,
-        Live: contentLive,
-    })
-
     contentArtists = CreateObject("roSGNode", "ContentNode")
     contentArtists.AddFields({
         HandlerConfigGrid: {
@@ -68,76 +46,91 @@ function setUpCustomViewContent()
             query: "Podcasts"
         }
     })
-    m.top.AddFields({
+    customView.contentsDict = {
+        Live: contentLive,
         Podcasts: contentPodcasts,
         Artists: contentArtists
-    })
-end function
-
-
-function SetUpButtonBar()
-    ' NOT USING
-    ' alternative way of Side Bar solution(built in with SGDEX)
-    m.top.buttonBar.visible = true
-    m.top.buttonBar.translation = [-100, 100]
-    m.top.buttonBar.alignment = "left"
-    m.top.buttonBar.overlay = true
-    m.top.buttonBar.renderOverContent = true
-    m.top.buttonBar.autoHide = false
-    m.top.buttonBar.enableFootprint = true
-    m.top.buttonBar.theme = {
-        buttonColor: "#000000",
-
     }
-    m.top.buttonBar.content = retrieveButtonBarContent()
-    m.top.buttonBar.ObserveField("itemSelected", "OnButtonBarItemSelected")
-
-    m.top.buttonBar.setFocus(true)
+    customView.query = "Live"
 end function
 
+function SelectedHandler(event as object)
+    ' METHOD FOR HANDLING SELECTED NODE
+    RowList = m.top.findNode("idCustomView")
+    customRowListElement = RowList.findNode("contentGrid")
+    item = RowList.content.GetChild(customRowListElement.rowItemSelected[0]).GetChild(customRowListElement.rowItemSelected[1])
 
-function retrieveButtonBarContent() as object
-    ' NOT USING
-    ' FUNCTION FOR SGDEX BUTTON BAR
-    ' alternative way of Side Bar solution(built in with SGDEX)
-    buttonBarContent = CreateObject("roSGNode", "ContentNode")
-    buttonBarContent.Update({
-        children: [{
-                title: "Live",
-                id: "Live"
-            }, {
-                title: "Artists",
-                id: "Artists"
-            }, {
-                title: "Podcasts",
-                id: "Podcasts",
-        },]
-    }, true)
+    if item.streamUrl <> invalid
+        videoContent = createObject("RoSGNode", "ContentNode")
+        videoContent.url = item.streamUrl
+        videoContent.title = item.TITLE
+        videoContent.streamformat = "hls"
 
-    return buttonBarContent
+        video = createObject("RoSGNode", "CustomVideo")
+        video.content = videoContent
+        video.control = "play"
+        video.pourl = item.HDPOSTERURL
+
+        m.top.FindNode("leftSideBar").visible = false
+        m.top.FindNode("channelName").visible = false
+
+        m.top.ComponentController.CallFunc("show", {
+            view: video
+        })
+    else
+        dialog = createObject("roSGNode", "Dialog")
+        dialog.title = "Error"
+        dialog.optionsDialog = true
+        dialog.message = "Sorry but we cant play it now, Press * To Dismiss"
+        m.top.dialog = dialog
+    end if
 end function
 
-sub OnButtonBarItemSelected(event as object)
-    ' NOT USING
-    ' FUNCTION FOR SGDEX BUTTON BAR
-    ' This is where you can handle a selection event
-    itemSelected = event.GetData()
-    buttonAA = [
-        "Live",
-        "Artists",
-        "Podcasts"
-    ]
-    mode = buttonAA[itemSelected]
-    customView = CreateObject("roSGNode", "CustomRowList")
-    content = CreateObject("roSGNode", "ContentNode")
-    content.AddFields({
-        HandlerConfigGrid: {
-            name: "APIContentHandler",
-            query: mode
-        }
-    })
-    customView.content = content
-    m.top.ComponentController.CallFunc("show", {
-        view: customView
-    })
-end sub
+' SETTING UP SIDE BAR
+function setUpSideBar()
+    sideBar = m.top.findNode("leftSideBar")
+    sideBar.content = SetUpSideBarContent()
+    sideBar.observeField("itemSelected", "SideBarItemObserver")
+end function
+
+function SetUpSideBarContent() as object
+    buttoninfos = [
+        {
+            name: "Live",
+            icon: "https://cdn1.iconfinder.com/data/icons/media-player-button/48/media_player_-_fast_forward-100.png"
+        },
+        {
+            name: "Artists",
+            icon: "https://cdn0.iconfinder.com/data/icons/party2-3/64/Concert-music-rock-singer-100.png"
+        },
+        {
+            name: "Podcasts",
+            icon: "https://cdn1.iconfinder.com/data/icons/celebrity-superstars/48/celebrity_-_singer-100.png"
+        },
+        {
+            name: "Settings",
+            icon: "https://cdn1.iconfinder.com/data/icons/media-player-button/48/media_player_-_equalizer-100.png"
+    }]
+    sideBarContent = CreateObject("roSGNode", "ContentNode")
+
+    for each btncont in buttoninfos
+        btnNode = Utils_AAToContentNode(btncont)
+        sideBarContent.appendChild(btnNode)
+    end for
+
+    return sideBarContent
+end function
+
+function SideBarItemObserver(event as object)
+    itemSelectedID = event.getData()
+    if itemSelectedID <> 3
+        buttonAA = [
+            "Live",
+            "Artists",
+            "Podcasts"
+        ]
+        customRowList = m.top.findNode("idCustomView")
+        customRowList.query = buttonAA[itemSelectedID]
+        customRowList.setFocus(true)
+    end if
+end function

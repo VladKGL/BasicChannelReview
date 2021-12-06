@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component name="sideBarItem" extends="Group" initialFocus="leftSideBarButtonGroup">
+    <interface> 
+        <field id = "itemContent" type = "node" onChange = "showcontent" />
+        <field id = "labelText" type = "string" alias="sideBarItemLabel.text" />
+        <field id = "iconUri" type = "string" alias="sideBarItemPoster.uri" />
+      </interface>
+      <script type = "text/brightscript" uri="sideBarItem.brs" />
+      <children>
+        <Poster
+        id="sideBarItemPoster" 
+        translation = "[20, 0]"/>
+        <Label
+        id="sideBarItemLabel" 
+        translation = "[100, 20]"
+        font="font:LargeSystemFont"/>
+      </children>
+</component>
